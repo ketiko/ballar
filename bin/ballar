@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+require_relative '../lib/ballar'
+
+puts "Enter the number of balls you wish to calculate in days"
+while ball_count = $stdin.readline.to_i
+  break if ball_count == 0
+  raise "Invalid number of balls" unless (27..127).include? ball_count
+
+  balls = (1..ball_count).to_a
+  clock = Ballar::Clock.new(balls)
+
+  begin
+    clock.tick
+  end while clock.balls != balls
+
+  puts "#{clock.balls.count} balls cycle after #{clock.days} days."
+end
